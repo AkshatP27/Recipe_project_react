@@ -2,10 +2,13 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { nanoid } from "nanoid";
 import { recipeContext } from "../context/RecipeContext";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   const { data, setdata } = useContext(recipeContext);
   const { register, handleSubmit, reset } = useForm();
+  const navigate = useNavigate();
 
   const SubmitHandler = (recipe) => {
     recipe.id = nanoid();
@@ -18,6 +21,17 @@ const Create = () => {
     setdata([...data, recipe]);
 
     reset(); // Reset the form after submission
+
+    toast.success("Recipe added successfully!", {
+      position: "top-right",
+      autoClose: 1600,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+    });
+
+    navigate("/recipes")
   };
 
   return (
@@ -50,7 +64,7 @@ const Create = () => {
       {/* Recipe Description */}
       <textarea
         className="block border-b outline-0 p-2 mb-9"
-        {...register("description")}
+        {...register("desc")}
         type="text"
         placeholder="Start recipe description here..."
       ></textarea>
@@ -77,9 +91,10 @@ const Create = () => {
         {...register("category")}
         type="text"
       >
-        <option value="cat-1">Category 1</option>
-        <option value="cat-2">Category 2</option>
-        <option value="cat-3">Category 3</option>
+        <option value="breakfast">Breakfast</option>
+        <option value="lunch">Lunch</option>
+        <option value="supper">Supper</option>
+        <option value="dinner">Dinner</option>
       </select>
 
       <button className="block px-4 py-2 bg-gray-700 rounded text-gray-100 font-bold">
