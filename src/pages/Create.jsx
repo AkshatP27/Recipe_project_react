@@ -87,7 +87,7 @@ const Create = () => {
 
       {/* Recipe Instructions */}
       <select
-        className="block border-b outline-0 p-2 mb-9"
+        className="block border-b outline-0 p-2 mb-9 bg-gray-900"
         {...register("category")}
         type="text"
       >

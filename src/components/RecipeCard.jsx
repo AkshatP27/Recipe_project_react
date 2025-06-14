@@ -17,7 +17,7 @@ const RecipeCard = (props) => {
       <h1 className="px-2 font-black text-xl">{title}</h1>
       <small className="px-2 text-red-400">-{chef}</small>
       <p className="px-2 mt-2">
-        {desc.slice(0, 18)}...{""}
+        {desc.slice(0, 50)}...{""}
         <small className="text-blue-400">more</small>
       </p>
 
