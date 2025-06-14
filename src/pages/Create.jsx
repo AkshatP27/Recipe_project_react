@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   const { data, setdata } = useContext(recipeContext);
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
   const SubmitHandler = (recipe) => {
@@ -17,11 +17,8 @@ const Create = () => {
     // const copyData = [...data];
     // copyData.push(recipe);
     // setdata(copyData);
-
     setdata([...data, recipe]);
-
-    reset(); // Reset the form after submission
-
+    reset();
     toast.success("Recipe added successfully!", {
       position: "top-right",
       autoClose: 1600,
@@ -30,77 +27,101 @@ const Create = () => {
       pauseOnHover: false,
       draggable: false,
     });
-
-    navigate("/recipes")
+    navigate("/recipes");
   };
 
+  const inputClasses = "block w-full border-b border-gray-700 bg-transparent outline-0 p-3 mb-6 focus:border-yellow-500 transition-colors duration-200";
+  const labelClasses = "text-xs uppercase tracking-wider text-gray-500 mb-1 block";
+
   return (
-    <form onSubmit={handleSubmit(SubmitHandler)}>
-      {/* Recipe Title */}
-      <input
-        className="block border-b outline-0 p-2 mb-7"
-        {...register("title")}
-        type="text"
-        placeholder="Recipe Title"
-      />
+    <div className="max-w-2xl mx-auto bg-gray-800/30 p-8 rounded-xl backdrop-blur-sm border border-gray-700/50 shadow-xl">
+      <h1 className="text-3xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500">
+        Create New Recipe
+      </h1>
+      
+      <form onSubmit={handleSubmit(SubmitHandler)} className="space-y-4">
+        {/* Recipe Title */}
+        <div>
+          <label className={labelClasses}>Recipe Title</label>
+          <input
+            className={inputClasses}
+            {...register("title", { required: true })}
+            type="text"
+            placeholder="Enter recipe title"
+          />
+        </div>
 
-      {/* Recipe TitlChef */}
-      <input
-        className="block border-b outline-0 p-2 mb-7"
-        {...register("chef")}
-        type="text"
-        placeholder="Chef name"
-      />
+        {/* Chef Name */}
+        <div>
+          <label className={labelClasses}>Chef Name</label>
+          <input
+            className={inputClasses}
+            {...register("chef", { required: true })}
+            type="text"
+            placeholder="Enter chef name"
+          />
+        </div>
 
-      {/* Recipe Image */}
-      <input
-        className="block border-b outline-0 p-2"
-        {...register("image")}
-        type="url"
-        placeholder="Enter image URL"
-      />
-      <small className="text-red-400 mb-7">for showing/displaying error</small>
+        {/* Recipe Image */}
+        <div>
+          <label className={labelClasses}>Recipe Image URL</label>
+          <input
+            className={inputClasses}
+            {...register("image", { required: true })}
+            type="url"
+            placeholder="https://example.com/image.jpg"
+          />
+        </div>
 
-      {/* Recipe Description */}
-      <textarea
-        className="block border-b outline-0 p-2 mb-9"
-        {...register("desc")}
-        type="text"
-        placeholder="Start recipe description here..."
-      ></textarea>
+        {/* Recipe Description */}
+        <div>
+          <label className={labelClasses}>Recipe Description</label>
+          <textarea
+            className={`${inputClasses} resize-none min-h-24`}
+            {...register("desc", { required: true })}
+            placeholder="Describe your recipe..."
+          ></textarea>
+        </div>
 
-      {/* Recipe Ingredients */}
-      <textarea
-        className="block border-b outline-0 p-2 mb-9"
-        {...register("ingredients")}
-        type="text"
-        placeholder="Write ingredients separated by comma(,)"
-      ></textarea>
+        {/* Recipe Ingredients */}
+        <div>
+          <label className={labelClasses}>Ingredients</label>
+          <textarea
+            className={`${inputClasses} resize-none min-h-24`}
+            {...register("ingredients", { required: true })}
+            placeholder="List ingredients separated by comma..."
+          ></textarea>
+        </div>
 
-      {/* Recipe Instructions */}
-      <textarea
-        className="block border-b outline-0 p-2 mb-9"
-        {...register("instructions")}
-        type="text"
-        placeholder="Write instructions here"
-      ></textarea>
+        {/* Recipe Instructions */}
+        <div>
+          <label className={labelClasses}>Instructions</label>
+          <textarea
+            className={`${inputClasses} resize-none min-h-36`}
+            {...register("instructions", { required: true })}
+            placeholder="Write cooking instructions here..."
+          ></textarea>
+        </div>
 
-      {/* Recipe Instructions */}
-      <select
-        className="block border-b outline-0 p-2 mb-9 bg-gray-900"
-        {...register("category")}
-        type="text"
-      >
-        <option value="breakfast">Breakfast</option>
-        <option value="lunch">Lunch</option>
-        <option value="supper">Supper</option>
-        <option value="dinner">Dinner</option>
-      </select>
+        {/* Recipe Category */}
+        <div>
+          <label className={labelClasses}>Category</label>
+          <select
+            className={`${inputClasses} cursor-pointer`}
+            {...register("category", { required: true })}
+          >
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="supper">Supper</option>
+            <option value="dinner">Dinner</option>
+          </select>
+        </div>
 
-      <button className="block px-4 py-2 bg-gray-700 rounded text-gray-100 font-bold">
-        Save Your Recipe
-      </button>
-    </form>
+        <button className="w-full px-4 py-3 bg-gradient-to-r from-yellow-400 to-red-500 rounded-lg text-gray-900 font-bold hover:shadow-lg hover:shadow-red-500/20 transition-shadow">
+          Save Your Recipe
+        </button>
+      </form>
+    </div>
   );
 };
 

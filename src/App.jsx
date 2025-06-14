@@ -4,9 +4,11 @@ import Navbar from './components/Navbar'
 
 const App = () => {
   return (
-    <div className='w-screen h-screen py-9 px-[16%] bg-gray-900 text-gray-50'>
-      <Navbar />
-      <MainRoutes />
+    <div className='min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-gray-50'>
+      <div className='container mx-auto py-9 px-6 md:px-8 lg:px-[10%] xl:px-[16%]'>
+        <Navbar />
+        <MainRoutes />
+      </div>
     </div>
   )
 }
