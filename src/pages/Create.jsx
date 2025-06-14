@@ -110,10 +110,10 @@ const Create = () => {
             className={`${inputClasses} cursor-pointer`}
             {...register("category", { required: true })}
           >
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="supper">Supper</option>
-            <option value="dinner">Dinner</option>
+            <option className="bg-gray-800 text-white" value="breakfast">Breakfast</option>
+            <option className="bg-gray-800 text-white" value="lunch">Lunch</option>
+            <option className="bg-gray-800 text-white" value="supper">Supper</option>
+            <option className="bg-gray-800 text-white" value="dinner">Dinner</option>
           </select>
         </div>
 
