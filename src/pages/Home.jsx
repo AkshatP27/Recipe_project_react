@@ -28,7 +28,7 @@ const Home = () => {
             to="/create-recipe" 
             className="px-8 py-3 border border-gray-600 rounded-full hover:border-yellow-500 hover:text-yellow-500 transition-colors duration-200"
           >
-            Share Your Recipe
+            Add Your Recipe
           </Link>
         </div>
       </div>
