@@ -1,10 +1,12 @@
-RecipeRender
+RecipeRender:
+
 A modern recipe management application built with React.
 
-About
+About:
+
 RecipeRender is an intuitive web application that allows food enthusiasts to discover, create, and manage recipes. Built with a focus on user experience and clean design, this platform provides a seamless way to organize culinary creations.
 
-Features
+Features:
 Recipe Browsing: Explore recipes with beautiful card layouts and detailed viewing options
 Category Filtering: Quickly find recipes by filtering through categories like breakfast, lunch, dinner, etc.
 Create & Edit: Easily add your own recipes with an intuitive form interface
