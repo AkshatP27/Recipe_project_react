@@ -1,12 +1,19 @@
-# React + Vite
+RecipeRender
+A modern recipe management application built with React.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+About
+RecipeRender is an intuitive web application that allows food enthusiasts to discover, create, and manage recipes. Built with a focus on user experience and clean design, this platform provides a seamless way to organize culinary creations.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Features
+Recipe Browsing: Explore recipes with beautiful card layouts and detailed viewing options
+Category Filtering: Quickly find recipes by filtering through categories like breakfast, lunch, dinner, etc.
+Create & Edit: Easily add your own recipes with an intuitive form interface
+Responsive Design: Enjoy a seamless experience across all devices with a mobile-friendly interface
+Real-time Updates: Changes to recipes appear instantly with React's state management
+Technologies Used
+React: UI building and component architecture
+React Router: Navigation and routing throughout the application
+Context API: Global state management for recipes data
+React Hook Form: Form handling with validation
+Tailwind CSS: Responsive styling with a beautiful dark theme
+Vite: Fast build tooling and development server
