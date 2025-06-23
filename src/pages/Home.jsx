@@ -1,9 +1,31 @@
-import React from 'react'
+import axios from "../utils/axios";
+import React, { useEffect } from "react";
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+  const getProduct = async () => {
+    try {
+      // const { data } = await axios.get("https://fakestoreapi.com/products/1")
+      // console.log(data);
+      const response = await axios.get("/products");
+      console.log(response.data);
 
-export default Home
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getProduct();
+  }, [])
+  
+
+  return (
+    <div>
+      Home
+      <br />
+      <button onClick={getProduct}>Get Product</button>
+    </div>
+  );
+};
+
+export default Home;
