@@ -11,21 +11,23 @@ const RecipeDetails = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      title: recipe.title,
-      image: recipe.image,
-      desc: recipe.desc,
-      ingredients: recipe.ingredients,
-      instructions: recipe.instructions,
-      chef: recipe.chef,
-      category: recipe.category,
+      title: recipe?.title, // Act as a short form of ternary operator
+      // iska mtlb ye hai ki "recipe object" agar available hai to uski "title" property ko use karo
+      image: recipe?.image,
+      desc: recipe?.desc,
+      ingredients: recipe?.ingredients,
+      instructions: recipe?.instructions,
+      chef: recipe?.chef,
+      category: recipe?.category,
     },
   });
 
-  const SubmitHandler = (recipe) => {
+  const UpdateHandler = (recipe) => {
     const recipeIndex = data.findIndex((recipe) => recipe.id == params.id);
     const copyRecipe = [...data];
     copyRecipe[recipeIndex] = { ...copyRecipe[recipeIndex], ...recipe };
     setdata(copyRecipe);
+    localStorage.setItem("recipes", JSON.stringify(copyRecipe));
 
     toast.success("Recipe updated successfully!", {
       position: "top-right",
@@ -43,6 +45,8 @@ const RecipeDetails = () => {
   const Deletehandler = () => {
     const filterData = data.filter((recipe) => recipe.id != params.id);
     setdata(filterData);
+    localStorage.setItem("recipes", JSON.stringify(filterData));
+
     toast.error("Recipe deleted successfully!", {
       position: "top-right",
       autoClose: 1600,
@@ -81,7 +85,7 @@ const RecipeDetails = () => {
       </div>
 
       <div className="right w-1/2 p-2">
-        <form onSubmit={handleSubmit(SubmitHandler)}>
+        <form onSubmit={handleSubmit(UpdateHandler)}>
           {/* Recipe Title */}
           <input
             className="block border-b outline-0 p-2 mb-7"

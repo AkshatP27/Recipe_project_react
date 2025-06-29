@@ -14,11 +14,13 @@ const Create = () => {
     recipe.id = nanoid();
     // console.log(recipe);
 
-    // const copyData = [...data];
-    // copyData.push(recipe);
-    // setdata(copyData);
+    const copyData = [...data];
+    copyData.push(recipe);
+    setdata(copyData);
 
-    setdata([...data, recipe]);
+    localStorage.setItem('recipes', JSON.stringify(copyData))
+
+    // setdata([...data, recipe]);
 
     reset(); // Reset the form after submission
 
