@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { recipeContext } from "../context/RecipeContext";
@@ -45,7 +45,13 @@ const RecipeDetails = () => {
   const Deletehandler = () => {
     const filterData = data.filter((recipe) => recipe.id != params.id);
     setdata(filterData);
+    
+    // Also remove from favorites if present
+    const filterFav = favorite.filter((f) => f.id != params.id);
+    setfavorite(filterFav);
+    
     localStorage.setItem("recipes", JSON.stringify(filterData));
+    localStorage.setItem("fav", JSON.stringify(filterFav));
 
     toast.error("Recipe deleted successfully!", {
       position: "top-right",
@@ -59,10 +65,47 @@ const RecipeDetails = () => {
   };
 
   // console.log(recipe);
+  // const favorite = JSON.parse(localStorage.getItem("fav")) || []
+
+  const [favorite, setfavorite] = useState(
+    JSON.parse(localStorage.getItem("fav")) || []
+  );
+
+  const Favhandler = () => {
+    const copyfav = [...favorite];
+    copyfav.push(recipe)
+    setfavorite(copyfav)
+
+    // setfavorite([...favorite, recipe])
+    // favorite.push(recipe)
+    localStorage.setItem("fav", JSON.stringify(copyfav))
+  };
+
+  const UnFavhandler = () => {
+    const filterFav = favorite.filter((f) => f.id != recipe?.id)
+    setfavorite(filterFav)
+    localStorage.setItem("fav", JSON.stringify(filterFav))
+  };
+
+  // "UseEffect()" is not necessary here...!
+  // useEffect(() => {
+  // }, [favorite])
+  
 
   return recipe ? (
     <div className="w-full flex gap-20">
-      <div className="left w-1/2 p-2">
+      <div className="relative left w-1/2 p-2">
+      {favorite.find((f) => f.id == recipe?.id) ? 
+        <i
+        onClick={UnFavhandler}
+        className="absolute text-4xl text-red-400 right-[-5%] ri-heart-fill"
+        ></i>
+        :
+        <i
+          onClick={Favhandler}
+          className="absolute text-4xl text-red-400 right-[-5%] ri-heart-line"
+        ></i>
+      }
         <div className="title-chef-name">
           <h1 className="text-5xl font-black mb-2">{recipe.title}</h1>
           <small className="pl-2 text-lg">-{recipe.chef}</small>
@@ -104,14 +147,14 @@ const RecipeDetails = () => {
 
           {/* Recipe Image */}
           <input
-            className="block border-b outline-0 p-2"
+            className="block border-b outline-0 p-2 mb-7"
             {...register("image")}
             type="url"
             placeholder="Enter image URL"
           />
-          <small className="text-red-400 mb-7">
+          {/* <small className="text-red-400 mb-7">
             for showing/displaying error
-          </small>
+          </small> */}
 
           {/* Recipe Description */}
           <textarea

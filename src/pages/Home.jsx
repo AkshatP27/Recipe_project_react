@@ -15,7 +15,7 @@ const Home = () => {
 
   useEffect(() => {
     // console.log("Home.jsx mounted");
-    getProduct();
+    // getProduct();
 
     // return () => {
     //   console.log("Home.jsx unmounted");

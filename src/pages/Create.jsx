@@ -56,12 +56,12 @@ const Create = () => {
 
       {/* Recipe Image */}
       <input
-        className="block border-b outline-0 p-2"
+        className="block border-b outline-0 p-2 mb-9"
         {...register("image")}
         type="url"
         placeholder="Enter image URL"
       />
-      <small className="text-red-400 mb-7">for showing/displaying error</small>
+      {/* <small className="text-red-400 mb-7">for showing/displaying error</small> */}
 
       {/* Recipe Description */}
       <textarea
