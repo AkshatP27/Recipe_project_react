@@ -12,17 +12,13 @@ const Create = () => {
 
   const SubmitHandler = (recipe) => {
     recipe.id = nanoid();
-    // console.log(recipe);
-
+    
     const copyData = [...data];
     copyData.push(recipe);
     setdata(copyData);
 
     localStorage.setItem('recipes', JSON.stringify(copyData))
-
-    // setdata([...data, recipe]);
-
-    reset(); // Reset the form after submission
+    reset();
 
     toast.success("Recipe added successfully!", {
       position: "top-right",
@@ -33,76 +29,100 @@ const Create = () => {
       draggable: false,
     });
 
-    navigate("/recipes")
+    navigate("/recipes");
   };
 
+  const inputClasses = "w-full bg-transparent border-b border-gray-700 px-3 py-2 focus:border-teal-400 focus:outline-none transition-colors";
+  const labelClasses = "block text-sm text-gray-400 mb-1";
+
   return (
-    <form onSubmit={handleSubmit(SubmitHandler)}>
-      {/* Recipe Title */}
-      <input
-        className="block border-b outline-0 p-2 mb-7"
-        {...register("title")}
-        type="text"
-        placeholder="Recipe Title"
-      />
+    <div className="max-w-2xl mx-auto bg-gray-800/30 p-8 rounded-lg border border-gray-700/50 shadow-lg">
+      <h1 className="text-2xl font-bold mb-8">Create New Recipe</h1>
+      
+      <form onSubmit={handleSubmit(SubmitHandler)} className="space-y-6">
+        <div>
+          <label className={labelClasses}>Recipe Title</label>
+          <input
+            className={inputClasses}
+            {...register("title")}
+            type="text"
+            placeholder="Enter a descriptive title"
+            required
+          />
+        </div>
 
-      {/* Recipe TitlChef */}
-      <input
-        className="block border-b outline-0 p-2 mb-7"
-        {...register("chef")}
-        type="text"
-        placeholder="Chef name"
-      />
+        <div>
+          <label className={labelClasses}>Chef Name</label>
+          <input
+            className={inputClasses}
+            {...register("chef")}
+            type="text"
+            placeholder="Your name or nickname"
+            required
+          />
+        </div>
 
-      {/* Recipe Image */}
-      <input
-        className="block border-b outline-0 p-2 mb-9"
-        {...register("image")}
-        type="url"
-        placeholder="Enter image URL"
-      />
-      {/* <small className="text-red-400 mb-7">for showing/displaying error</small> */}
+        <div>
+          <label className={labelClasses}>Image URL</label>
+          <input
+            className={inputClasses}
+            {...register("image")}
+            type="url"
+            placeholder="https://example.com/image.jpg"
+            required
+          />
+        </div>
 
-      {/* Recipe Description */}
-      <textarea
-        className="block border-b outline-0 p-2 mb-9"
-        {...register("desc")}
-        type="text"
-        placeholder="Start recipe description here..."
-      ></textarea>
+        <div>
+          <label className={labelClasses}>Description</label>
+          <textarea
+            className={`${inputClasses} resize-none h-24`}
+            {...register("desc")}
+            placeholder="Describe your recipe in a few sentences"
+            required
+          ></textarea>
+        </div>
 
-      {/* Recipe Ingredients */}
-      <textarea
-        className="block border-b outline-0 p-2 mb-9"
-        {...register("ingredients")}
-        type="text"
-        placeholder="Write ingredients separated by comma(,)"
-      ></textarea>
+        <div>
+          <label className={labelClasses}>Ingredients</label>
+          <textarea
+            className={`${inputClasses} resize-none h-24`}
+            {...register("ingredients")}
+            placeholder="List ingredients separated by commas"
+            required
+          ></textarea>
+        </div>
 
-      {/* Recipe Instructions */}
-      <textarea
-        className="block border-b outline-0 p-2 mb-9"
-        {...register("instructions")}
-        type="text"
-        placeholder="Write instructions here"
-      ></textarea>
+        <div>
+          <label className={labelClasses}>Instructions</label>
+          <textarea
+            className={`${inputClasses} resize-none h-36`}
+            {...register("instructions")}
+            placeholder="Provide step-by-step cooking instructions"
+            required
+          ></textarea>
+        </div>
 
-      {/* Recipe Instructions */}
-      <select
-        className="block border-b outline-0 p-2 mb-9 bg-gray-900"
-        {...register("category")}
-        type="text"
-      >
-        <option value="breakfast">Breakfast</option>
-        <option value="lunch">Lunch</option>
-        <option value="supper">Supper</option>
-        <option value="dinner">Dinner</option>
-      </select>
+        <div>
+          <label className={labelClasses}>Category</label>
+          <select
+            className="w-full bg-gray-800 border-b border-gray-700 px-3 py-2 rounded focus:border-teal-400 focus:outline-none transition-colors text-white"
+            {...register("category")}
+            required
+          >
+            <option value="breakfast" className="bg-gray-800 text-white">Breakfast</option>
+            <option value="lunch" className="bg-gray-800 text-white">Lunch</option>
+            <option value="dinner" className="bg-gray-800 text-white">Dinner</option>
+            <option value="dessert" className="bg-gray-800 text-white">Dessert</option>
+            <option value="snack" className="bg-gray-800 text-white">Snack</option>
+          </select>
+        </div>
 
-      <button className="block px-4 py-2 bg-gray-700 rounded text-gray-100 font-bold">
-        Save Your Recipe
-      </button>
-    </form>
+        <button className="w-full bg-teal-500 text-gray-900 py-3 rounded-md font-medium hover:bg-teal-400 transition-colors">
+          Save Recipe
+        </button>
+      </form>
+    </div>
   );
 };
 

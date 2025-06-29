@@ -2,29 +2,35 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const RecipeCard = (props) => {
-  const { id, image, title, desc, chef } = props.recipe;
+  const { id, image, title, desc, chef, category } = props.recipe;
 
   return (
     <Link
       to={`/recipes/details/${id}`}
-      className="hover:scale-102 duration-150 w-[21vw] block rounded-lg overflow-hidden shadow-2xl bg-gray-800 p-3 mr-3 mb-5"
+      className="group block rounded-lg overflow-hidden bg-gray-800/50 border border-gray-700/50 shadow-lg transition-all duration-300 hover:shadow-teal-900/30 hover:transform hover:scale-[1.01]"
     >
-      <img
-        className="object-cover w-full h-[25vh] mb-3 rounded-lg"
-        src={image}
-        alt=""
-      />
-      <h1 className="px-2 font-black text-xl">{title}</h1>
-      <small className="px-2 text-red-400">-{chef}</small>
-      <p className="px-2 mt-2">
-        {desc.slice(0, 50)}...{""}
-        <small className="text-blue-400">more</small>
-      </p>
-
-      {/* Copied this "div" from "Recipes.jsx" file... */}
-      {/* <div key={recipe.id}>
-        <h1>{recipe.title}</h1>
-      </div> */}
+      <div className="relative">
+        <img
+          className="h-48 w-full object-cover"
+          src={image}
+          alt={title}
+        />
+        {category && (
+          <span className="absolute top-3 right-3 bg-gray-900/70 text-teal-300 text-xs px-2 py-1 rounded-full">
+            {category}
+          </span>
+        )}
+      </div>
+      <div className="p-4">
+        <h3 className="text-lg font-semibold line-clamp-1 group-hover:text-teal-300 transition-colors">
+          {title}
+        </h3>
+        <p className="text-sm text-gray-400 mt-1">by {chef}</p>
+        <p className="text-sm text-gray-300 mt-3 line-clamp-2">
+          {desc?.slice(0, 100)}...
+        </p>
+        <div className="mt-4 text-xs font-medium text-teal-400">Read more →</div>
+      </div>
     </Link>
   );
 };
