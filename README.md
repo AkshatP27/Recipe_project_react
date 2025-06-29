@@ -1,12 +1,33 @@
-# React + Vite
+# Recipe Render - React Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+https://recipe-render.netlify.app/
 
-Currently, two official plugins are available:
+RecipeRender is a modern web application built with React that allows users to Create and Save delicious recipes. With a clean, responsive interface and powerful search capabilities, this application makes cooking inspiration just a few clicks away.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#
+# Features
+🍽️ Detailed Recipe View: Complete instructions, ingredients lists, and cooking times
 
-## Expanding the ESLint configuration
+💾 Favorite Recipes: Save your favorite recipes for quick access later
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+📱 Fully Responsive: Works beautifully on desktop, tablet, and mobile devices
+
+⚡ Performance Optimized: Fast loading times and smooth interactions
+
+🌈 Modern UI: Clean, intuitive interface with beautiful recipe imagery
+
+#
+# Technologies Used
+Frontend: React (v18)
+
+State Management: React Context API + Hooks
+
+Styling: CSS Modules
+
+Routing: React Router (v6)
+
+API: TheMealDB API
+
+Build Tool: Vite
+
+Testing: React Testing Library
